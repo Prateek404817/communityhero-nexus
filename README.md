@@ -722,6 +722,8 @@ Special thanks to:
 - Werkzeug
 - Python Software Foundation
 
+Google AI Studio was used during solution development for AI-assisted design, prototyping, prompt engineering, UI iteration, and Gemini-powered workflows. The final application is implemented as a Flask-based full-stack web application.
+
 Map tiles are provided by **OpenStreetMap contributors**.
 
 ---
