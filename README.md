@@ -315,8 +315,6 @@ The platform focuses on assisting decision-making rather than simply collecting 
 
 The following screenshots demonstrate the major workflows of CommunityHero Nexus.
 
-> **Note:** Replace the placeholder images below with the screenshots stored in the `screenshots/` folder.
-
 ---
 
 ## 🏠 Landing Page
