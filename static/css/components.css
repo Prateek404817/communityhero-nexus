@@ -1,0 +1,32 @@
+
+/* ==========================================
+   GLASS CARD COMPONENT
+========================================== */
+
+.glass-card{
+
+    background:rgba(255,255,255,.06);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:20px;
+
+    backdrop-filter:blur(18px);
+
+    padding:30px;
+
+    transition:.35s;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.35);
+
+}
+
+.glass-card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:#38BDF8;
+
+    box-shadow:0 20px 60px rgba(59,130,246,.25);
+
+}

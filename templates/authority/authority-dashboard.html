@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+
+{% block title %}
+Authority Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <h1 class="mb-5">
+        🏛 Authority Dashboard
+    </h1>
+
+    <div class="glass-card p-4">
+
+        <table class="table table-dark table-hover align-middle">
+
+            <thead>
+
+                <tr>
+
+                    <th>Tracking ID</th>
+
+                    <th>Title</th>
+
+                    <th>Status</th>
+
+                    <th>Priority</th>
+
+                    <th>Authority</th>
+
+                    <th style="width:340px;">Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for issue in issues %}
+
+                <tr>
+
+                    <td>
+
+                        <strong>{{ issue.tracking_id }}</strong>
+
+                    </td>
+
+                    <td>
+
+                        {{ issue.title }}
+
+                    </td>
+
+                    <td>
+
+                        {% if issue.status=="Resolved" %}
+
+                        <span class="badge bg-success">
+
+                            {{ issue.status }}
+
+                        </span>
+
+                        {% elif issue.status=="In Progress" %}
+
+                        <span class="badge bg-warning text-dark">
+
+                            {{ issue.status }}
+
+                        </span>
+
+                        {% else %}
+
+                        <span class="badge bg-primary">
+
+                            {{ issue.status }}
+
+                        </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        {% if issue.priority=="High" %}
+
+                        <span class="badge bg-danger">
+
+                            {{ issue.priority }}
+
+                        </span>
+
+                        {% elif issue.priority=="Medium" %}
+
+                        <span class="badge bg-warning text-dark">
+
+                            {{ issue.priority }}
+
+                        </span>
+
+                        {% else %}
+
+                        <span class="badge bg-success">
+
+                            {{ issue.priority }}
+
+                        </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        {{ issue.authority }}
+
+                    </td>
+
+                    <td>
+
+                        <div class="d-flex align-items-center gap-2 flex-wrap">
+
+                            <a href="/issue/{{ issue.tracking_id }}"
+                               class="btn btn-info btn-sm">
+
+                                View AI Report
+
+                            </a>
+
+                            <form
+                                action="/authority/update/{{ issue.id }}"
+                                method="POST"
+                                class="d-flex gap-2">
+
+                                <select
+                                    name="status"
+                                    class="form-select form-select-sm"
+                                    style="width:160px;">
+
+                                    <option value="Reported"
+                                    {% if issue.status=="Reported" %}selected{% endif %}>
+                                        Reported
+                                    </option>
+
+                                    <option value="Verified"
+                                    {% if issue.status=="Verified" %}selected{% endif %}>
+                                        Verified
+                                    </option>
+
+                                    <option value="Assigned"
+                                    {% if issue.status=="Assigned" %}selected{% endif %}>
+                                        Assigned
+                                    </option>
+
+                                    <option value="In Progress"
+                                    {% if issue.status=="In Progress" %}selected{% endif %}>
+                                        In Progress
+                                    </option>
+
+                                    <option value="Resolved"
+                                    {% if issue.status=="Resolved" %}selected{% endif %}>
+                                        Resolved
+                                    </option>
+
+                                </select>
+
+                                <button
+                                    type="submit"
+                                    class="btn btn-success btn-sm">
+
+                                    Update
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

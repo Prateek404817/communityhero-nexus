@@ -1,0 +1,284 @@
+{% extends "base.html" %}
+
+{% block title %}
+AI Analysis Result
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+    
+        <span class="badge bg-info fs-6 mb-3">
+    
+            🤖 Multi-Agent AI Report
+    
+        </span>
+    
+        <h1 class="display-5 fw-bold">
+    
+            Issue Intelligence Report
+    
+        </h1>
+    
+        <p class="text-secondary">
+    
+            Generated using Scout AI, Risk AI, Authority AI & Resolution AI
+    
+        </p>
+    
+    </div>
+
+    <!-- Tracking -->
+
+    <div class="glass-card p-4 mb-4">
+    
+        <div class="row align-items-center">
+    
+            <div class="col-md-8">
+    
+                <h3>📌 Tracking ID</h3>
+    
+                <h2 class="text-info">
+    
+                    {{ result.issue.tracking_id }}
+    
+                </h2>
+    
+            </div>
+    
+            <div class="col-md-4 text-end">
+    
+                <span class="badge bg-success fs-6">
+    
+                    {{ result.issue.status }}
+    
+                </span>
+    
+            </div>
+    
+        </div>
+    
+    </div>
+
+    <!-- Citizen Report -->
+
+    <div class="glass-card p-4 mb-4">
+
+        <h3>Citizen Report</h3>
+        
+        <img src="{{ url_for('uploaded_file', filename=result.issue.image_path.replace('uploads/','').replace('\\','/')) }}"
+            class="img-fluid rounded shadow-lg mb-4" style="
+        width:100%;
+        max-height:450px;
+        object-fit:cover;
+        border-radius:20px;
+        ">
+
+        <hr>
+        
+        <div class="row">
+        
+            <div class="col-md-6">
+        
+                <p><strong>📂 Category</strong></p>
+        
+                <span class="badge bg-primary">
+        
+                    {{ result.issue.category }}
+        
+                </span>
+        
+            </div>
+        
+            <div class="col-md-6">
+        
+                <p><strong>📍 Location</strong></p>
+        
+                {{ result.issue.address }}
+        
+            </div>
+        
+        </div>
+
+        <p><strong>Title :</strong> {{ result.issue.title }}</p>
+
+        <p><strong>Description :</strong></p>
+
+        <p>{{ result.issue.description }}</p>
+
+        <p><strong>Category :</strong> {{ result.issue.category }}</p>
+
+        <p><strong>Address :</strong> {{ result.issue.address }}</p>
+
+        <p><strong>Coordinates :</strong>
+
+            {{ result.issue.latitude }},
+            {{ result.issue.longitude }}
+
+        </p>
+
+    </div>
+
+    <!-- Scout AI -->
+
+    <div class="glass-card p-4 mb-4">
+
+        <h3>Scout AI</h3>
+        
+        <p><strong>Detected Issue</strong></p>
+        
+        <h4>{{ result.scout.issue_type }}</h4>
+        
+        <p>
+        
+            <strong>Severity</strong>
+        
+            {% if result.scout.severity=="High" %}
+        
+            <span class="badge bg-danger">
+        
+                {{ result.scout.severity }}
+        
+            </span>
+        
+            {% elif result.scout.severity=="Medium" %}
+        
+            <span class="badge bg-warning text-dark">
+        
+                {{ result.scout.severity }}
+        
+            </span>
+        
+            {% else %}
+        
+            <span class="badge bg-success">
+        
+                {{ result.scout.severity }}
+        
+            </span>
+        
+            {% endif %}
+        
+        </p>
+
+        <p>
+        
+            Confidence
+        
+        </p>
+        
+        <div class="progress mb-3">
+        
+            <div class="progress-bar bg-info" style="width:{{ result.scout.confidence }}%;">
+        
+                {{ result.scout.confidence }}%
+        
+            </div>
+        
+        </div>
+
+        <p>{{ result.scout.description }}</p>
+
+    </div>
+
+    <!-- Risk -->
+
+    <div class="row text-center">
+    
+        <div class="col">
+    
+            <h2 class="text-danger">
+    
+                {{ result.risk.risk_score }}
+    
+            </h2>
+    
+            <p>Risk Score</p>
+    
+        </div>
+    
+        <div class="col">
+    
+            <h2 class="text-warning">
+    
+                {{ result.risk.risk_level }}
+    
+            </h2>
+    
+            <p>Risk Level</p>
+    
+        </div>
+    
+    </div>
+    
+    <hr>
+    
+    <p>
+    
+        {{ result.risk.reason }}
+    
+    </p>
+
+    <!-- Authority -->
+
+    <div class="glass-card p-4 mb-4">
+
+        <h3>Authority AI</h3>
+
+        <p>Authority :</p>
+
+        <p>
+        
+            Priority
+        
+            <span class="badge bg-danger">
+        
+                {{ result.authority.priority }}
+        
+            </span>
+        
+        </p>
+
+        <p>{{ result.authority.department }}</p>
+
+        <p>Priority : {{ result.authority.priority }}</p>
+
+    </div>
+
+    <!-- Resolution -->
+
+    <div class="glass-card p-4">
+
+        <h3>🛠 Resolution Plan</h3>
+
+        <ul>
+
+        {% for step in result.resolution.steps %}
+
+            <li>{{ step }}</li>
+
+        {% endfor %}
+
+        </ul>
+
+        <p>
+
+            Estimated Time :
+            {{ result.resolution.estimated_time }}
+
+        </p>
+
+        <p>
+
+            Resources :
+            {{ result.resolution.resources }}
+
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}

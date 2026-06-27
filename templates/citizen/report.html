@@ -1,0 +1,253 @@
+{% extends "base.html" %}
+
+{% block title %}
+Report Community Issue
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <h1 class="text-center mb-5 fw-bold">
+        Report Community Issue
+    </h1>
+
+    <div class="glass-card p-4">
+
+        <form action="/submit-report"
+              method="POST"
+              enctype="multipart/form-data">
+
+            <!-- Image -->
+
+            <div class="mb-4">
+
+                <label class="form-label fw-bold">
+
+                    Upload Issue Image
+
+                </label>
+
+                <input
+                    type="file"
+                    class="form-control"
+                    id="issueImage"
+                    name="image"
+                    accept="image/*"
+                    required>
+
+            </div>
+
+            <!-- Preview -->
+
+            <div class="text-center mb-4">
+
+                <img
+                    id="previewImage"
+                    src=""
+                    style="
+                    display:none;
+                    max-width:100%;
+                    max-height:350px;
+                    border-radius:20px;
+                    ">
+
+            </div>
+
+            <div class="text-center mb-5">
+
+                <button
+                    type="button"
+                    id="removeImage"
+                    class="btn btn-outline-danger"
+                    style="display:none;">
+
+                    Remove Image
+
+                </button>
+
+            </div>
+
+            <!-- Title -->
+
+            <div class="mb-4">
+
+                <label class="form-label fw-bold">
+
+                    Issue Title
+
+                </label>
+
+                <input
+                    type="text"
+                    class="form-control"
+                    name="title"
+                    placeholder="Example: Huge pothole near school"
+                    required>
+
+            </div>
+
+            <!-- Description -->
+
+            <div class="mb-4">
+
+                <label class="form-label fw-bold">
+
+                    Describe the Issue
+
+                </label>
+
+                <textarea
+                    class="form-control"
+                    rows="5"
+                    name="description"
+                    placeholder="Explain the problem..."
+                    required></textarea>
+
+            </div>
+
+            <!-- Category -->
+
+            <div class="mb-4">
+
+                <label class="form-label fw-bold">
+
+                    Category
+
+                </label>
+
+                <select
+                    class="form-select"
+                    name="category">
+
+                    <option>Road Damage</option>
+
+                    <option>Garbage</option>
+
+                    <option>Street Light</option>
+
+                    <option>Water Leakage</option>
+
+                    <option>Drainage</option>
+
+                    <option>Electricity</option>
+
+                    <option>Tree Hazard</option>
+
+                    <option>Other</option>
+
+                </select>
+
+            </div>
+
+            <!-- Address -->
+
+            <div class="mb-4">
+
+                <label class="form-label fw-bold">
+
+                    Address
+
+                </label>
+
+                <input
+                    class="form-control"
+                    type="text"
+                    name="address"
+                    required>
+
+            </div>
+
+            <!-- Map -->
+
+            <div class="mb-4">
+
+                <label class="form-label fw-bold">
+
+                    Select Exact Location
+
+                </label>
+
+                <div
+                    id="map"
+                    style="
+                    height:450px;
+                    border-radius:20px;
+                    ">
+                </div>
+
+                <input
+                    type="hidden"
+                    id="latitude"
+                    name="latitude">
+
+                <input
+                    type="hidden"
+                    id="longitude"
+                    name="longitude">
+
+            </div>
+
+            <!-- Contact -->
+
+            <div class="mb-4">
+
+                <label class="form-label fw-bold">
+
+                    Contact Number (Optional)
+
+                </label>
+
+                <input
+                    class="form-control"
+                    type="text"
+                    name="contact">
+
+            </div>
+
+            <!-- Anonymous -->
+
+            <div class="form-check mb-5">
+
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="anonymous">
+
+                <label class="form-check-label">
+
+                    Submit Anonymously
+
+                </label>
+
+            </div>
+
+            <!-- Button -->
+
+            <div class="text-center">
+
+                <button
+                    class="btn btn-primary btn-lg px-5"
+                    type="submit">
+
+                    Analyze with CommunityHero AI
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/report.js') }}"></script>
+
+{% endblock %}

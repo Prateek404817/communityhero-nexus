@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+
+{% block title %}
+Track Issue
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <h1 class="text-center mb-5">
+        🔎 Track Your Issue
+    </h1>
+
+    <!-- Search Card -->
+
+    <div class="glass-card p-4 mb-5">
+
+        <form method="POST">
+
+            <div class="row">
+
+                <div class="col-md-10">
+
+                    <input
+                        type="text"
+                        name="tracking_id"
+                        class="form-control form-control-lg"
+                        placeholder="Enter Tracking ID (Example: CHN-2026-0001)"
+                        required>
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary btn-lg w-100">
+
+                        Search
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    {% if issue %}
+
+    <!-- Result Card -->
+
+    <div class="glass-card p-4">
+
+        <h2 class="mb-4">
+
+            📋 Issue Details
+
+        </h2>
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <p><strong>Tracking ID:</strong></p>
+
+                <h4 class="text-info">
+
+                    {{ issue.tracking_id }}
+
+                </h4>
+
+                <hr>
+
+                <p><strong>Title</strong></p>
+
+                <p>{{ issue.title }}</p>
+
+                <p><strong>Description</strong></p>
+
+                <p>{{ issue.description }}</p>
+
+                <p><strong>Category</strong></p>
+
+                <p>{{ issue.category }}</p>
+
+                <p><strong>Address</strong></p>
+
+                <p>{{ issue.address }}</p>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <p><strong>Status</strong></p>
+
+                <h4>
+
+                    <span class="badge bg-success">
+
+                        {{ issue.status }}
+
+                    </span>
+
+                </h4>
+
+                <hr>
+
+                <p><strong>Assigned Authority</strong></p>
+
+                <p>{{ issue.authority }}</p>
+
+                <p><strong>Department</strong></p>
+
+                <p>{{ issue.department }}</p>
+
+                <p><strong>Priority</strong></p>
+
+                <span class="badge bg-danger">
+
+                    {{ issue.priority }}
+
+                </span>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <h4 class="mb-4">
+
+            📍 Progress Timeline
+
+        </h4>
+
+        <ul class="list-group">
+
+            <li class="list-group-item">
+                ✅ Issue Reported
+            </li>
+
+            <li class="list-group-item">
+                🤖 AI Analysis Completed
+            </li>
+
+            <li class="list-group-item">
+                🏛 Assigned to Authority
+            </li>
+
+            <li class="list-group-item">
+                🚧 Current Status :
+                <strong>{{ issue.status }}</strong>
+            </li>
+
+        </ul>
+
+        <div class="mt-4 text-center">
+
+            <a
+                href="/issue/{{ issue.tracking_id }}"
+                class="btn btn-primary btn-lg">
+
+                🤖 View Complete AI Report
+
+            </a>
+
+        </div>
+
+    </div>
+
+    {% elif searched %}
+
+    <div class="alert alert-danger">
+
+        ❌ No issue found with this Tracking ID.
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

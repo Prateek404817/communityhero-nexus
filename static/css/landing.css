@@ -1,0 +1,119 @@
+/* =====================================
+   HOW IT WORKS
+===================================== */
+
+.section-title{
+
+    font-size:2.6rem;
+
+    font-weight:700;
+
+    color:white;
+
+}
+
+.section-subtitle{
+
+    color:#94A3B8;
+
+    margin-top:15px;
+
+    margin-bottom:50px;
+
+}
+
+.workflow{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+.workflow-step{
+
+    width:250px;
+
+    text-align:center;
+
+}
+
+.step-icon{
+
+    font-size:3rem;
+
+    margin-bottom:20px;
+
+}
+
+.workflow-step h4{
+
+    color:white;
+
+    margin-bottom:15px;
+
+}
+
+.workflow-step p{
+
+    color:#94A3B8;
+
+}
+
+.workflow-arrow{
+
+    font-size:2rem;
+
+    color:#38BDF8;
+
+    font-weight:bold;
+
+}
+
+/* ==========================================
+   FEATURE CARDS
+========================================== */
+
+.feature-card{
+
+    text-align:center;
+
+    height:100%;
+
+    transition:.35s;
+
+}
+
+.feature-card:hover{
+
+    transform:translateY(-12px);
+
+}
+
+.feature-icon{
+
+    font-size:3.5rem;
+
+    margin-bottom:20px;
+
+}
+
+.feature-card h4{
+
+    margin-bottom:18px;
+
+    color:white;
+
+}
+
+.feature-card p{
+
+    color:#cbd5e1;
+
+}

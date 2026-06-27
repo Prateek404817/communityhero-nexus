@@ -1,0 +1,357 @@
+{% extends "base.html" %}
+
+{% block title %}
+AI Command Center
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{{ url_for('static',filename='css/dashboard-modern.css') }}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <h1 class="dashboard-title">
+
+        🧠 CommunityHero AI Command Center
+
+    </h1>
+
+    <div class="row">
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="dashboard-card total-card">
+                <div class="card-icon">
+                    📄
+                </div>
+                <h2>{{ stats.total }}</h2>
+                <p>Total Reports</p>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="dashboard-card pending-card">
+                <div class="card-icon">
+                    ⏳
+                </div>
+                <h2>{{ stats.pending }}</h2>
+                <p>Pending</p>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="dashboard-card resolved-card">
+                <div class="card-icon">
+                    ✅
+                </div>
+                <h2>{{ stats.resolved }}</h2>
+                <p>Resolved</p>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="dashboard-card health-card">
+                <div class="card-icon">
+                    ❤️
+                </div>
+                <h2>{{ stats.health }}%</h2>
+                <p>Community Health</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="section-card mt-5">
+
+        <h3>
+
+            📍 Live Community Heatmap
+
+        </h3>
+
+        <div id="heatmap" style="
+        height:550px;
+        border-radius:20px;
+        overflow:hidden;
+        "></div>
+
+    </div>
+
+    <!-- Statistics -->
+
+    <div class="row mt-5">
+
+        <div class="col-lg-6">
+        
+            <div class="section-card">
+        
+                <h3 class="mb-4">
+        
+                    📊 Issue Distribution
+        
+                </h3>
+        
+                <canvas id="issueChart" height="250"></canvas>
+        
+            </div>
+        
+        </div>
+
+        <div class="col-lg-6">
+
+            <div class="section-card">
+
+                <h3>
+
+                    ❤️ Community Health
+
+                </h3>
+
+                <div class="display-2 text-info">
+
+                    {{ stats.health }}%
+
+                </div>
+
+                <p>
+
+                    Overall City Health Score
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Leaderboard -->
+
+    <div class="section-card">
+
+        <h3 class="mb-4">
+
+            🏆 Best Performing Departments
+
+        </h3>
+
+        <table class="table table-dark table-hover">
+
+            <thead>
+
+                <tr>
+
+                    <th>Department</th>
+
+                    <th>Resolved</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for dept,count in stats.leaderboard %}
+
+                <tr>
+
+                    <td>{{ dept }}</td>
+
+                    <td>{{ count }}</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- Recent Reports -->
+
+    <div class="section-card">
+
+        <h3 class="mb-4">
+
+            📋 Recent Reports
+
+        </h3>
+
+        <table class="table table-dark table-striped">
+
+            <thead>
+
+                <tr>
+
+                    <th>Tracking</th>
+
+                    <th>Title</th>
+
+                    <th>Status</th>
+
+                    <th>Priority</th>
+
+                    <th>Authority</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for issue in stats.issues %}
+
+                <tr>
+
+                    <td>{{ issue.tracking_id }}</td>
+
+                    <td>{{ issue.title }}</td>
+
+                    <td>
+
+                        <span class="badge bg-primary">
+
+                            {{ issue.status }}
+
+                        </span>
+
+                    </td>
+
+                    <td>{{ issue.priority }}</td>
+
+                    <td>{{ issue.authority }}</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- AI Prediction -->
+
+    <div class="section-card">
+
+        <div class="alert alert-primary">
+        
+            <h5>
+        
+                🤖 AI Recommendations
+        
+            </h5>
+        
+            <hr>
+        
+            <ul>
+        
+                <li>Prioritize high severity road damage reports.</li>
+        
+                <li>Increase sanitation teams in repeated garbage zones.</li>
+        
+                <li>Deploy inspection teams for unresolved issues older than 7 days.</li>
+        
+                <li>Monitor recurring complaints for predictive maintenance.</li>
+        
+            </ul>
+        
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script>
+
+const points = {{ stats.heatmap | tojson | safe }};
+
+</script>
+
+<script src="{{ url_for('static', filename='js/heatmap.js') }}"></script>
+
+<script>
+
+loadHeatMap(points);
+
+const ctx = document.getElementById("issueChart");
+
+if (ctx) {
+
+    new Chart(ctx, {
+
+        type: "doughnut",
+
+        data: {
+
+            labels: [
+
+                "Resolved",
+
+                "Pending"
+
+            ],
+
+            datasets: [{
+
+                data: [
+
+                    {{ stats.resolved }},
+
+                    {{ stats.pending }}
+
+                ],
+
+                backgroundColor: [
+
+                    "#22c55e",
+
+                    "#f59e0b"
+
+                ],
+
+                borderWidth: 0
+
+            }]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            maintainAspectRatio: false,
+
+            plugins: {
+
+                legend: {
+
+                    position: "bottom",
+
+                    labels: {
+
+                        color: "white"
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    });
+
+}
+
+</script>
+
+{% endblock %}

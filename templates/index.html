@@ -1,0 +1,323 @@
+{% extends "base.html" %}
+
+{% block title %}
+CommunityHero Nexus
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="container">
+
+        <div class="hero-content">
+
+            <div class="hero-badge">
+                <i class="bi bi-stars"></i>
+                Multi-Agent AI Powered Civic Intelligence Platform
+            </div>
+
+            <h1 class="hero-title">
+                CommunityHero Nexus
+            </h1>
+
+            <p class="hero-subtitle">
+                Transforming Civic Issues into Actionable Community Intelligence
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="/report" class="btn btn-primary btn-lg">
+                    Report Issue
+                </a>
+
+                <a href="{{ url_for('dashboard.dashboard') }}" class="btn btn-outline-light btn-lg">
+                    Explore Dashboard
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="stats-section">
+
+            <div class="stat-card">
+                <h2>{{ stats.total }}</h2>
+                <p>Total Issues</p>
+            </div>
+
+            <div class="stat-card">
+                <h2>{{ stats.resolved }}</h2>
+                <p>Resolved Issues</p>
+            </div>
+
+            <div class="stat-card">
+                <h2>{{ stats.pending }}</h2>
+                <p>Pending Issues</p>
+            </div>
+
+            <div class="stat-card">
+                <h2>{{ stats.health }}%</h2>
+                <p>Community Health</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================
+     HOW IT WORKS
+=========================== -->
+
+<section class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h2 class="section-title">
+            How CommunityHero Nexus Works
+        </h2>
+
+        <p class="section-subtitle">
+            A complete AI-powered workflow from citizen report to issue resolution.
+        </p>
+
+    </div>
+
+    <div class="workflow">
+
+        <div class="workflow-step glass-card">
+
+            <div class="step-icon">
+                📷
+            </div>
+
+            <h4>Report Issue</h4>
+
+            <p>
+                Citizen uploads an image, enters the address and selects the location.
+            </p>
+
+        </div>
+
+        <div class="workflow-arrow">
+            →
+        </div>
+
+        <div class="workflow-step glass-card">
+
+            <div class="step-icon">
+                🤖
+            </div>
+
+            <h4>AI Analysis</h4>
+
+            <p>
+                Scout AI, Risk AI, Authority AI and Resolution AI analyze the issue.
+            </p>
+
+        </div>
+
+        <div class="workflow-arrow">
+            →
+        </div>
+
+        <div class="workflow-step glass-card">
+
+            <div class="step-icon">
+                🏛
+            </div>
+
+            <h4>Authority Action</h4>
+
+            <p>
+                The responsible department reviews and updates the issue status.
+            </p>
+
+        </div>
+
+        <div class="workflow-arrow">
+            →
+        </div>
+
+        <div class="workflow-step glass-card">
+
+            <div class="step-icon">
+                ✅
+            </div>
+
+            <h4>Resolution</h4>
+
+            <p>
+                Citizens track the issue until it is successfully resolved.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================================
+     PLATFORM FEATURES
+========================================== -->
+
+<section class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h2 class="section-title">
+
+            Powerful AI Features
+
+        </h2>
+
+        <p class="section-subtitle">
+
+            CommunityHero Nexus combines multiple AI agents to automate civic issue management.
+
+        </p>
+
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-lg-4 col-md-6">
+
+            <div class="glass-card feature-card">
+
+                <div class="feature-icon">
+
+                    🧠
+
+                </div>
+
+                <h4>Scout AI</h4>
+
+                <p>
+
+                    Detects issue type, severity and confidence from uploaded images.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+
+            <div class="glass-card feature-card">
+
+                <div class="feature-icon">
+
+                    📍
+
+                </div>
+
+                <h4>Geo Mapping</h4>
+
+                <p>
+
+                    Every report is mapped using precise GPS coordinates.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+
+            <div class="glass-card feature-card">
+
+                <div class="feature-icon">
+
+                    🏛
+
+                </div>
+
+                <h4>Authority AI</h4>
+
+                <p>
+
+                    Automatically routes reports to the correct department.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+
+            <div class="glass-card feature-card">
+
+                <div class="feature-icon">
+
+                    📊
+
+                </div>
+
+                <h4>AI Command Center</h4>
+
+                <p>
+
+                    Live analytics, leaderboards, health score and heatmaps.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+
+            <div class="glass-card feature-card">
+
+                <div class="feature-icon">
+
+                    🔎
+
+                </div>
+
+                <h4>Smart Tracking</h4>
+
+                <p>
+
+                    Citizens can track every issue from report to resolution.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+
+            <div class="glass-card feature-card">
+
+                <div class="feature-icon">
+
+                    🤖
+
+                </div>
+
+                <h4>AI Assistant</h4>
+
+                <p>
+
+                    Ask questions about reports, departments and platform insights.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+{% endblock %}
